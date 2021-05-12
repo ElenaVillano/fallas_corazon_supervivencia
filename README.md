@@ -1,3 +1,5 @@
 # Análisis de supervivencia para pacientes con fallas del corazón.
 
-- (Datos)[https://archive.ics.uci.edu/ml/datasets/Heart+failure+clinical+records]
+------
+
+- Los datos están disponibles [aquí](https://archive.ics.uci.edu/ml/datasets/Heart+failure+clinical+records).
