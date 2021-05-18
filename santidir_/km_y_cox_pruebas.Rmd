@@ -1,0 +1,114 @@
+---
+title: "final_bio"
+author: "Santiago"
+date: "5/18/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+
+Nota: 
+Se podria tratar de empezar ajustando los tiempos a algun modelo para ver si su supervivencia tiene forma de algun modelo etc...
+```{r}
+
+```
+
+ 
+
+```{r cars}
+ library(tidyverse)
+
+library(survival)
+library(KMsurv)
+library(actuar)
+library(BGPhazard)
+library(rmutil)
+
+data<-read_csv('heart_failure_clinical_records_dataset.csv')
+
+```
+
+ 
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+summary(data)
+```
+
+
+```{r}
+data
+```
+ 
+
+KM en funcion del sexo, no hay grandes diferencias: 
+```{r}
+# Kaplan Meyer en funcion del sexo: 
+
+t<-Surv(data$time,data$DEATH_EVENT)
+xfit<-survfit(t~data$sex)
+plot(xfit,col=1:2)
+```
+ 
+ 
+
+ Siguiendo a Ahmed et al probamos la relacion de survival en funcion del ejection fraction
+generando 3 intervalos: 
+<30
+entre 30 y 45
+> a 45
+
+
+
+```{r}
+
+breaks<-c(0,30,45)
+#breaks <- seq(min(data$time), max(data$time), 0.03)
+EF_intervals<-cut(data$ejection_fraction,c(breaks,Inf), labels = breaks, include.lowest = TRUE)
+
+```
+
+
+```{r}
+xfit_2<-survfit(t~EF_intervals)
+plot(xfit_2,col=1:3)
+```
+ 
+   
+
+Cox regression en funcion de ejection fraction: 
+```{r}
+xfitc<-coxph(t~data$ejection_fraction)
+summary(xfitc)
+```
+
+
+  Para validar el modelo: 
+ 
+ boot.roc(pred, true.class, stratify = TRUE, n.boot = 1000,
+  use.cache = FALSE, tie.strategy = NULL)
+ 
+
+
+
+
+
+
+Pruebo estas dos variables porque Chicco y Jurman (2020) encontraron que son relevantes. 
+Pero ellos usan otros modelos no lineales para encontrar la importancia de estas variables. 
+```{r}
+xfitc_2<-coxph(t~ejection_fraction+serum_creatinine, data=data)
+summary(xfitc_2)
+```
+
+Se puede hacer nu test anova para comparar los dos modelos de arriba: 
+Y observamos que el segundo modelo es mejor porque su log lik es mayor
+```{r}
+anova(xfitc,xfitc_2)
+```
+
