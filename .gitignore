@@ -1,1 +1,5 @@
-*.RData
+*.RData 
+docs/fallas_corazoon.bcf 
+docs/fallas_corazoon.log 
+docs/fallas_corazoon.run.xml
+docs/fallas_corazoon.tex
