@@ -54,16 +54,16 @@ Este conjunto de datos contiene los registros médicos de 299 pacientes que tuvi
 
 \begin{itemize}
   \item \texttt{age}: Edad del paciente (años). 
+  \item \texttt{sex}: Mujer u hombre (binaria).
   \item \texttt{anaemia}: Disminución de glóbulos rojos o hemoglobina (booleana).
-  \item \texttt{creatinine-phosphokinase}: Nivel de la enzima CPK en sangre (mcg/L).
   \item \texttt{diabetes}: Si el paciente tiene diabetes (booleana). 
-  \item \texttt{ejection-fraction}: Fracción de ejección, porcentaje de sangre que sale del corazón en cada contracción (porcentaje).
+  \item \texttt{smoking}: Tabaquismo, si el paciente fuma o no (booleana).
   \item \texttt{high-blood-pressure}: Si el paciente tiene hipertensión (booleana).
+  \item \texttt{ejection-fraction}: Fracción de ejección, porcentaje de sangre que sale del corazón en cada contracción (porcentaje).
+  \item \texttt{creatinine-phosphokinase}: Nivel de la enzima CPK en sangre (mcg/L).
   \item \texttt{platelets}: Plaquetas en la sangre (kiloplaquetas/ml).
   \item \texttt{serum-creatinine}: Nivel de creatinina sérica en sangre (mg/dl).
   \item \texttt{serum-sodium}: Nivel de sodio sérico en sanre (mEq/L).
-  \item \texttt{sex}: Mujer u hombre (binaria).
-  \item \texttt{smoking}: Tabaquismo, si el paciente fuma o no (booleana).
   \item \texttt{time}: Periodo de seguimiento (días).
   \item \texttt{DEATH-EVENT}: Si el paciente falleció durante el período de seguimiento (booleana).
 \end{itemize}

@@ -1,5 +1,5 @@
 *.RData 
-
+*.Rhistory
 docs/fallas_corazon.bcf
 docs/fallas_corazon.log
 docs/fallas_corazon.run.xml

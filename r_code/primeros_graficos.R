@@ -93,14 +93,16 @@ ggpairs(corazones, columns=c(3,5,7,8,9),
         aes(color=as.factor(diabetes),alpha=0.5))
 #my_cols <- c("#00AFBB", "#E7B800", "#FC4E07")  
 
+corazones$id <- seq(1,299,1)
 
 
 corazones$platelets <- log(corazones$platelets)
 
 
-
-
-
+ggplot(corazones, aes(x=time,y=id))+
+  geom_linerange(aes(xmin=0,xmax=time,
+                     color=factor(DEATH_EVENT)),alpha=0.9)+
+  geom_point(aes(color=factor(DEATH_EVENT)), size=1, shape=20)
 
 
 
