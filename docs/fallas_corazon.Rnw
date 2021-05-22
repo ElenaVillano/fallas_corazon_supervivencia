@@ -4,7 +4,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{authblk}
 \usepackage{setspace}
-\usepackage[margin=1.25in]{geometry}
+\usepackage[margin=1in]{geometry}
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage{amsmath}
@@ -49,6 +49,28 @@ Las fallas del corazón son de las muertes más comunes
 \section{Base de datos}
 
 Descripción de la información: Describan cada una de sus variables, escalas de medición, y presenten un análisis exploratorio de datos
+
+Este conjunto de datos contiene los registros médicos de 299 pacientes que tuvieron una falla en el corazón. Estos datos se colectaron durante el periodo de seguimiento y cada paciente tiene 13 características clínicas\footnote{Base de datos obtenidas del Machine Learning Repository: {https://archive.ics.uci.edu/}}.
+
+\begin{itemize}
+  \item \texttt{age}: Edad del paciente (años). 
+  \item \texttt{anaemia}: Disminución de glóbulos rojos o hemoglobina (booleana).
+  \item \texttt{creatinine-phosphokinase}: Nivel de la enzima CPK en sangre (mcg/L).
+  \item \texttt{diabetes}: Si el paciente tiene diabetes (booleana). 
+  \item \texttt{ejection-fraction}: Fracción de ejección, porcentaje de sangre que sale del corazón en cada contracción (porcentaje).
+  \item \texttt{high-blood-pressure}: Si el paciente tiene hipertensión (booleana).
+  \item \texttt{platelets}: Plaquetas en la sangre (kiloplaquetas/ml).
+  \item \texttt{serum-creatinine}: Nivel de creatinina sérica en sangre (mg/dl).
+  \item \texttt{serum-sodium}: Nivel de sodio sérico en sanre (mEq/L).
+  \item \texttt{sex}: Mujer u hombre (binaria).
+  \item \texttt{smoking}: Tabaquismo, si el paciente fuma o no (booleana).
+  \item \texttt{time}: Periodo de seguimiento (días).
+  \item \texttt{DEATH-EVENT}: Si el paciente falleció durante el período de seguimiento (booleana).
+\end{itemize}
+
+\subsection{Análisis exploratorio}
+
+
 
 \section{Modelado e implementación}
 
