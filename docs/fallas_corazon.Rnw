@@ -38,17 +38,50 @@
 
 \section{Introducción}
 
-
 La idea del trabajo es que muestren que saben usar los modelos que vimos en clase de manera apropiada para resolver un problema práctico. Les pido que consigan una base de datos, preferentemente de sus trabajos o en su defecto de repositorios de internet, que los motive. Una vez teniendo la base de datos se van a formular una serie de objetivos a resolver y en el trabajo van a plasmar que fue lo que hicieron para resolver esos objetivos.
 
 Descripción del probelam, contexto y objetivos a resolver
 
+Qué son fallas del corazón, estadísticas mundiales y en México. 
 
 Las fallas del corazón son de las muertes más comunes
 
 \section{Base de datos}
 
+\begin{figure}[!ht]
+\centering
+\includegraphics[]{images/edad_sexo.pdf}
+\caption{hola}
+\label{fig:corplot}
+\end{figure}
+
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[]{images/binary.pdf}
+\caption{hola}
+\label{fig:corplot}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[height=6.5in,width=6.5in]{images/corrplot.pdf}
+\caption{hola}
+\label{fig:corplot}
+\end{figure}
+
+
+
+
+
 Descripción de la información: Describan cada una de sus variables, escalas de medición, y presenten un análisis exploratorio de datos
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[]{images/censura.pdf}
+\caption{hola}
+\label{fig:censurados}
+\end{figure}
 
 Este conjunto de datos contiene los registros médicos de 299 pacientes que tuvieron una falla en el corazón. Estos datos se colectaron durante el periodo de seguimiento y cada paciente tiene 13 características clínicas\footnote{Base de datos obtenidas del Machine Learning Repository: {https://archive.ics.uci.edu/}}.
 
@@ -67,6 +100,10 @@ Este conjunto de datos contiene los registros médicos de 299 pacientes que tuvi
   \item \texttt{time}: Periodo de seguimiento (días).
   \item \texttt{DEATH-EVENT}: Si el paciente falleció durante el período de seguimiento (booleana).
 \end{itemize}
+
+\subsection{Recolección}
+
+105 mujes, y 194 hombres. Todos los pacientes tiene disfunción sistólica ventricular. 
 
 \subsection{Análisis exploratorio}
 
