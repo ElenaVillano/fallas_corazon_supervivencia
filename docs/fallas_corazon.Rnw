@@ -38,37 +38,34 @@
 
 \section{Introducción}
 
-La idea del trabajo es que muestren que saben usar los modelos que vimos en clase de manera apropiada para resolver un problema práctico. Una vez teniendo la base de datos se van a formular una serie de objetivos a resolver y en el trabajo van a plasmar que fue lo que hicieron para resolver esos objetivos.
+El término médico adecuado de una falla del corazón, es disfunción sistólica ventricular que se refiere a cuando el ventrículo izquierdo del corazón, muestra una disminución en su funcionalidad. Dicha disminución limitará la cantidad de sangre que bombea el corazón a todo el cuerpo, lo que puede puede producir insuficiencia cardiaca congestiva, infarto al miocardio, entre otras enfermedades vasculares (AEEC, s.f.). 
 
-Descripción del probelam, contexto y objetivos a resolver
+Las fallas en el corazón son la causa de muerte más comun en hombres, mujeres y personas de distintos grupos étnicos en países como Estados Unidos. Además, en México, las enfermedades del corazón han aumentado un 90\% desde 1970 y son la segunda causa de muerte, representando el 17\% de todas las muertes en 2008 (Morales et al, 2014). 
 
-Qué son fallas del corazón, estadísticas mundiales y en México. 
+Existen muchas causas de fallas del corazón, como la presión alta, la diabetes, el tabaquismo, la alimentación, etc. A pesar de esto, parece que no hay un concenso en las causas de esta enfermedad, por lo que hay varios esfuerzos para determinar las razones principales de esta enfermedad. 
 
-Las fallas del corazón son de las muertes más comunes
+\subsection{Objetivo}
 
-\subsubsection{Objetivo}
-
-El objetivo del presente proyecto es evaluar lo
+El objetivo del presente trabajo es estudiar variables asociadas a fallas del corazón por lo que buscaremos estimar la mortalidad de dicha enfermedad, relacionada a otros factores riesgo.
 
 \section{Base de datos}
 
-
-Este conjunto de datos contiene los registros médicos de 299 pacientes que tuvieron una falla en el corazón, que el término médico adecuado es disfunción sistólica ventricular. Estos datos se colectaron durante el periodo de seguimiento, y cada paciente tiene las siguientes 13 características clínicas\footnote{Base de datos obtenidas del Machine Learning Repository: {https://archive.ics.uci.edu/}}.
+Este conjunto de datos contiene los registros médicos de 299 pacientes que tuvieron una falla en el corazón. Todos los pacientes tuvieron una disfunción ventricular sistólica izquierda y pertenecen a alguna de las clases 3 o 4, de la clasificación de insuficiencia cardiaca según la NYHA (New York Heart Association). Este estudio se llevó a cabo en Pakistán y tuvo un periodo de seguimiento de 4 a 285 días, con un promedio de 130 días. Cada persona fue diagnosticada por un cirujano médico. Cada paciente tiene las siguientes 13 características clínicas\footnote{Base de datos obtenidas del Machine Learning Repository: {https://archive.ics.uci.edu/}}.
 
 \begin{itemize}
-  \item \texttt{age}: Edad del paciente (años). 
-  \item \texttt{sex}: Mujer u hombre (binaria).
-  \item \texttt{anaemia}: Disminución de glóbulos rojos o hemoglobina (booleana).
+  \item \texttt{edad}: Edad del paciente (años). 
+  \item \texttt{sexo}: Mujer u hombre (binaria).
+  \item \texttt{anemia}: Disminución de glóbulos rojos o hemoglobina (booleana).
   \item \texttt{diabetes}: Si el paciente tiene diabetes (booleana). 
-  \item \texttt{smoking}: Tabaquismo, si el paciente fuma o no (booleana).
-  \item \texttt{high-blood-pressure}: Si el paciente tiene hipertensión (booleana).
-  \item \texttt{ejection-fraction}: Fracción de ejección, porcentaje de sangre que sale del corazón en cada contracción (porcentaje).
-  \item \texttt{creatinine-phosphokinase}: Nivel de la enzima CPK en sangre (mcg/L).
-  \item \texttt{platelets}: Plaquetas en la sangre (kiloplaquetas/ml).
-  \item \texttt{serum-creatinine}: Nivel de creatinina sérica en sangre (mg/dl).
-  \item \texttt{serum-sodium}: Nivel de sodio sérico en sanre (mEq/L).
-  \item \texttt{time}: Periodo de seguimiento (días).
-  \item \texttt{DEATH-EVENT}: Si el paciente falleció durante el período de seguimiento (booleana).
+  \item \texttt{fumar}: Tabaquismo, si el paciente fuma o no (booleana).
+  \item \texttt{presion alta}: Si el paciente tiene hipertensión (booleana).
+  \item \texttt{salida sangre}: Fracción de ejección, porcentaje de sangre que sale del corazón en cada contracción (porcentaje).
+  \item \texttt{enzima cpk}: Nivel de la enzima CPK en sangre (mcg/L).
+  \item \texttt{plaquetas}: Plaquetas en la sangre (kiloplaquetas/ml).
+  \item \texttt{nivel creanitina}: Nivel de creatinina sérica en sangre (mg/dl).
+  \item \texttt{nivel sodio}: Nivel de sodio sérico en sanre (mEq/L).
+  \item \texttt{tiempo}: Periodo de seguimiento (días).
+  \item \texttt{deceso}: Si el paciente falleció durante el período de seguimiento (booleana).
 \end{itemize}
 
 A continuación, se presenta un análisis exploratorio para observar el comportamiento general de las variables. 
@@ -96,18 +93,18 @@ La Figura~\ref{fig:binary}, presenta también gráficos de barras de todas las v
 \label{fig:binary}
 \end{figure}
 
-La Figura~\ref{fig:corplot} es un gráfico que contiene los scatterplots de las variables continuas que tenemos, así mismo su contraparte muestra las correlaciones. Existen dos colores porque el rosa hace referencia a los hombres  y el azul a las mujeres. Además, las variables de salida sangre y plaquetas están en logaritmo para poder apreciar mejor la relación con otras variables. El objetivo de mostrar este gráfico es para apreciar que no existen correlaciones claras entre las variables continuas, que se confirma con su contraparte con el estadístico de correlación, esto sucede para ambos sexos. 
+La Figura~\ref{fig:corplot} es un gráfico que contiene los scatterplots de las variables continuas que tenemos, así mismo su contraparte muestra las correlaciones. Existen dos colores, el azu, hace referencia a los hombres  y el rosa a las mujeres. Además, las variables de salida sangre y plaquetas están en logaritmo para poder apreciar mejor la relación con otras variables. El objetivo de mostrar este gráfico es para apreciar que no existen correlaciones claras entre las variables continuas, que se confirma con el estadístico de correlación, esto sucede para ambos sexos. 
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[height=6.5in,width=6.5in]{images/corrplot.pdf}
-\caption{hola}
+\caption{Diagrama de pares para las variables continuas del estudio. En la contraparte inferior son los scatterplots y en la parte superior las correlaciones. En la diagonal se muestran las densidades por variable. }
 \label{fig:corplot}
 \end{figure}
 
 \subsection{Datos censurados}
 
-La variable evento muerte nos indica si el paciente falleció o no durante el periodo de seguimiento. En la presente base de datos, el 32\% de los pacientes fallecieron durante el periodo de seguimiento del estudio. En la Figura~\ref{fig:censurados} podemos observar una línea que indica el periodo de seguimiento para cada paciente y si es un dato censurado o no, indicado por color. Lo importante de este gráfico es observar la mayoría de los pacientes que fallecieron durante el estudio, lo hicieron en el primer tercio del periodo, que equivale a 90 días aproximadamente. También, existe un conjunto de varios decesos presentados en el periodo de casi 180 días. Por último, parece ser que los pacientes que tuvieron un periodo más largo de seguimiento fueron los que no presentaron el deceso. 
+La variable evento muerte nos indica si el paciente falleció o no durante el periodo de seguimiento. En la presente base de datos, el 32\% de los pacientes fallecieron durante el periodo de seguimiento del estudio. En la Figura~\ref{fig:censurados} podemos observar una línea que indica el periodo de seguimiento para cada paciente y si es un dato censurado o no, indicado por color. Lo importante de este gráfico es observar la mayoría de los pacientes que fallecieron durante el estudio, lo hicieron en el primer tercio del periodo, que equivale a 90 días aproximadamente. También, existe un conjunto de varios decesos presentados en el periodo de casi 180 días. Por último, parece ser que los pacientes que tuvieron un periodo más largo de seguimiento fueron los que, afortunadamente, no fallecieron. 
 
 \begin{figure}[!ht]
 \centering
@@ -117,11 +114,11 @@ La variable evento muerte nos indica si el paciente falleció o no durante el pe
 \end{figure}
 
 
-
-
 \section{Modelado e implementación}
 
 \subsection{Verificación de supuestos}
+
+Se ajustaron diferentes familias de modelos paramétricos (weibull, lognormal y loglogística) a los datos censurados por derecha resultando el modelo Lognormal con una media de 1.91 y una desviación de 1.91 el que presentó una mejor Log veroscimilitud. Asimismo se realizaron gráficas de diagnóstico, en las que también se observa que el modelo log normal es el que mejor parece adaptarse a los datos.
 
 \begin{figure}[!ht]
 \centering
@@ -130,13 +127,13 @@ La variable evento muerte nos indica si el paciente falleció o no durante el pe
 \label{fig:supuestos}
 \end{figure}
 
-
+\subsection{Kaplan Mayer}
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[]{images/niveles.pdf}
-\caption{hola}
-\label{fig:km_vida}
+\caption{Estimador Kaplan Mayer para las variables dicotómicas.}
+\label{fig:km}
 \end{figure}
 
 
@@ -144,10 +141,20 @@ La variable evento muerte nos indica si el paciente falleció o no durante el pe
 \centering
 \includegraphics[]{images/niv_creati.pdf}
 \caption{hola}
-\label{fig:km_vida}
+\label{fig:km_2}
 \end{figure}
 
-describan con detalle el modelo, con todas sus especificaciones, que usarán para resolver sus objetivos. Corran su modelo en R, Python o el paquete que mejor les acomode.
+
+Para el presente análisis se utilizó el estimador Kaplan Mayer para determinar la supervivencia de las variables categóricas que tenemos en la muestra. Por ejemplo, en la Figura~\ref{fig:km} obtuvimos el estimador para todas las variables binarias que tenemos, como lo son diabetes, sexo, fumar, anemia y presión alta. Asimismo, se creó una variable que categoriza el nivel de creatinina en alto o bajo. Esta discretización se realizó basand
+
+Cada subgráfico tiene en el título la categoría a la que pertenece. En dicha figura no observamos una supervivencia distinta para grupos que padecen alguna enfermedad (como la diabetes o la anemia) que tradicionalmente suelen estar asociadas a los ataques al corazón. Lo mismo sucede con los grupos de fumadores, en comparación con los no fumadores. 
+
+Asimismo, discretizamos algunas variables continuas, generando intervalos que nos permitieran tener grupos, de acuerdo a umbrales mencionados por la investigación pertinente como relevantes. Siguiendo los resultados de Wannamethee et. Al (1997), generamos grupos a partir de una concentración de 116 micromol/L (micromoles por litro de sangre) de la variable nivel de creatinina, umbral a partir del cual estos autores han detectado, en un estudio basado en otros datos, un riesgo de ataque al corazón. De igual manera, la variable ejection fraction se discretizó en tres grupos, siguiendo a Ahmad et al. (2017). En ambos casos, las tablas Kaplan Meyer muestran un grupo de riesgo con una supervivencia considerablemente menor, lo que sugiere que estas variables podrían tener un efecto explicativo relevante.
+
+
+
+
+describan con detalle el modelo, con todas sus especificaciones, que usarán para resolver sus objetivos.
 
 
 
@@ -161,6 +168,17 @@ Interpretación de resultados: presenten un resumen de sus estimadores (puntuale
 \section*{Referencias}
 
 Incluyan una lista de las fuentes que consultaron para hacer su trabajo, desde páginas de internet, libros, revistas o apuntes de clase.
+
+
+\begin{description}
+  \item[] Asociación Española de Enfermería en Cardiología (s.f.). [www.enfermeriaencardiologia.com]
+  \item[] Chicco D, Jurman G (2020), "Machine learning can predict survival of patients with heart failure from serum creatinine and ejection fraction alone". BMC Medical Informatics and Decision Making 20, 16.
+  \item[] Morales LS, Flores YN, Leng M, Sportiche N, GallegosCarrillo K, Salmerón J. (2014). Risk factors for cardiovascular disease among Mexican-American adults in the United States and Mexico: a comparative study. Salud Publica Mex 56:197–205.
+  \item[] Tanvir Ahmad, Assia Munir, Sajjad Haider Bhatti, Muhammad Aftab, and Muhammad Ali Raza (2017), "Survival analysis of heart failure patients: a case study". PLoS ONE 12(7), 0181001.
+  \item[] Wannamethee S G, Shaper A G, Perry I J (1997), Serum creatinine concentration and risk of cardiovascular disease: a possible marker for increased risk of stroke, Stroke, Mar;28(3):557-63. doi: 10.1161/01.str.28.3.557.
+  
+\end{description}
+
 
 \section*{Apéndice}
 
