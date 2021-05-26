@@ -26,7 +26,7 @@ hist(corazones$time,breaks = 50,
 
 # Información general por individuo
 layout(matrix(c(1:2),ncol=2))
-barplot(table(corazones$sex),col='orange',
+barplot(table(corazones$sexo),col='orange',
         border= 'orange', ylim=c(0,200),xlim=c(0,3),
         main = 'Sexo')
 hist(corazones$age,breaks = 25, col='blue', border= 'blue4', main='Edad')
@@ -37,11 +37,11 @@ hist(corazones$age,breaks = 25, col='blue', border= 'blue4', main='Edad')
 
 layout(matrix(c(1:4),ncol=2))
 
-barplot(table(corazones$anaemia),col='orange',
+barplot(table(corazones$anemia),col='orange',
         border= 'orange', ylim=c(0,200),xlim=c(0,3),
         main = 'Anemia')
 
-barplot(table(corazones$high_blood_pressure),col='orange',
+barplot(table(corazones$presion_alta),col='orange',
         border= 'orange', ylim=c(0,200),xlim=c(0,3),
         main = 'Hipertensión')
 
@@ -49,7 +49,7 @@ barplot(table(corazones$diabetes),col='orange',
         border= 'orange', ylim=c(0,200),xlim=c(0,3),
         main = 'Diabético')
 
-barplot(table(corazones$smoking),col='orange',
+barplot(table(corazones$fumar),col='orange',
         border= 'orange', ylim=c(0,200),xlim=c(0,3),
         main = 'Fuma')
 
