@@ -218,10 +218,7 @@ splots[[6]] <- a5
 
 res <- arrange_ggsurvplots(splots,
                     ncol = 2, nrow = 3)
-ggsave('niveles.pdf',res,path = '../docs/images/')
-
-
-
+#ggsave('niveles.pdf',res,path = '../docs/images/')
 
 
 breaks<-c(0,30,45)

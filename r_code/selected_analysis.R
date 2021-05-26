@@ -100,8 +100,10 @@ dev.off()
 ggplot(corazones, aes(x=tiempo,y=sujetos))+
   geom_linerange(aes(xmin=0,xmax=tiempo,
                      color=deceso),alpha=0.9)+
-  geom_point(aes(color=deceso), size=1, shape=20)#+
-#  ggsave('censura.pdf',  path = '../docs/images/')
+  geom_point(aes(color=deceso), size=1, shape=20)+
+  xlab('Periodo de seguimiento (días)')+
+  ylab('Pacientes')
+ggsave('censura.pdf',  path = '../docs/images/')
 
 
 

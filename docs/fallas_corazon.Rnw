@@ -38,7 +38,7 @@
 
 \section{Introducción}
 
-La idea del trabajo es que muestren que saben usar los modelos que vimos en clase de manera apropiada para resolver un problema práctico. Les pido que consigan una base de datos, preferentemente de sus trabajos o en su defecto de repositorios de internet, que los motive. Una vez teniendo la base de datos se van a formular una serie de objetivos a resolver y en el trabajo van a plasmar que fue lo que hicieron para resolver esos objetivos.
+La idea del trabajo es que muestren que saben usar los modelos que vimos en clase de manera apropiada para resolver un problema práctico. Una vez teniendo la base de datos se van a formular una serie de objetivos a resolver y en el trabajo van a plasmar que fue lo que hicieron para resolver esos objetivos.
 
 Descripción del probelam, contexto y objetivos a resolver
 
@@ -46,44 +46,14 @@ Qué son fallas del corazón, estadísticas mundiales y en México.
 
 Las fallas del corazón son de las muertes más comunes
 
+\subsubsection{Objetivo}
+
+El objetivo del presente proyecto es evaluar lo
+
 \section{Base de datos}
 
-\begin{figure}[!ht]
-\centering
-\includegraphics[]{images/edad_sexo.pdf}
-\caption{hola}
-\label{fig:corplot}
-\end{figure}
 
-
-\begin{figure}[!ht]
-\centering
-\includegraphics[]{images/binary.pdf}
-\caption{hola}
-\label{fig:corplot}
-\end{figure}
-
-\begin{figure}[!ht]
-\centering
-\includegraphics[height=6.5in,width=6.5in]{images/corrplot.pdf}
-\caption{hola}
-\label{fig:corplot}
-\end{figure}
-
-
-
-
-
-Descripción de la información: Describan cada una de sus variables, escalas de medición, y presenten un análisis exploratorio de datos
-
-\begin{figure}[!ht]
-\centering
-\includegraphics[]{images/censura.pdf}
-\caption{hola}
-\label{fig:censurados}
-\end{figure}
-
-Este conjunto de datos contiene los registros médicos de 299 pacientes que tuvieron una falla en el corazón. Estos datos se colectaron durante el periodo de seguimiento y cada paciente tiene 13 características clínicas\footnote{Base de datos obtenidas del Machine Learning Repository: {https://archive.ics.uci.edu/}}.
+Este conjunto de datos contiene los registros médicos de 299 pacientes que tuvieron una falla en el corazón, que el término médico adecuado es disfunción sistólica ventricular. Estos datos se colectaron durante el periodo de seguimiento, y cada paciente tiene las siguientes 13 características clínicas\footnote{Base de datos obtenidas del Machine Learning Repository: {https://archive.ics.uci.edu/}}.
 
 \begin{itemize}
   \item \texttt{age}: Edad del paciente (años). 
@@ -101,13 +71,53 @@ Este conjunto de datos contiene los registros médicos de 299 pacientes que tuvi
   \item \texttt{DEATH-EVENT}: Si el paciente falleció durante el período de seguimiento (booleana).
 \end{itemize}
 
-\subsection{Recolección}
-
-105 mujes, y 194 hombres. Todos los pacientes tiene disfunción sistólica ventricular. 
+A continuación, se presenta un análisis exploratorio para observar el comportamiento general de las variables. 
 
 \subsection{Análisis exploratorio}
 
-~\ref{fig:censurados}
+En la Figura~\ref{fig:edad_sexo}, se observa de lado izquierdo un gráfico de barras para la variable de sexo, que nos muestra que tenemos casi el doble de hombres que mujeres. En el histograma de lado derecho, podemos las edades de todos los participantes, el rango de edad va de 40 a casi 100; observamos que tenemos más conteos de edades en los 50, también se observa una concentración de conteos en los 40, 45, 50, 60, 65 y 70. 
+
+La Figura~\ref{fig:binary}, presenta también gráficos de barras de todas las variables booleanas que tenemos en el estudio que son anemia, diabetes, hipertensión y fumar. En todas, el 1 significa presencia y el cero ausencia. En la mayoría observamos más presencia de personas que se podrían considerar sanas en estas características pues no tiene ni anemia, ni diabetes, ni hipertensión. Así mismo, la variable que más diferencia tiene es la de tabaquismo, pues casi el doble de los sujetos no fuman, en comparación con los que sí fuman. 
+
+
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[]{images/edad_sexo.pdf}
+\caption{Gráficos de sexo y edad: De lado izquierdo es un gráfico de barras para sexo, done 1 significa hombre y 0 mujer. De lado derecho, un histograma con las edades de los participantes.}
+\label{fig:edad_sexo}
+\end{figure}
+
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[]{images/binary.pdf}
+\caption{Graficos de barras para las variables de anemia, diabetes, hipertensión y tabaquismo.}
+\label{fig:binary}
+\end{figure}
+
+La Figura~\ref{fig:corplot} es un gráfico que contiene los scatterplots de las variables continuas que tenemos, así mismo su contraparte muestra las correlaciones. Existen dos colores porque el rosa hace referencia a los hombres  y el azul a las mujeres. Además, las variables de salida sangre y plaquetas están en logaritmo para poder apreciar mejor la relación con otras variables. El objetivo de mostrar este gráfico es para apreciar que no existen correlaciones claras entre las variables continuas, que se confirma con su contraparte con el estadístico de correlación, esto sucede para ambos sexos. 
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[height=6.5in,width=6.5in]{images/corrplot.pdf}
+\caption{hola}
+\label{fig:corplot}
+\end{figure}
+
+\subsection{Datos censurados}
+
+La variable evento muerte nos indica si el paciente falleció o no durante el periodo de seguimiento. En la presente base de datos, el 32\% de los pacientes fallecieron durante el periodo de seguimiento del estudio. En la Figura~\ref{fig:censurados} podemos observar una línea que indica el periodo de seguimiento para cada paciente y si es un dato censurado o no, indicado por color. Lo importante de este gráfico es observar la mayoría de los pacientes que fallecieron durante el estudio, lo hicieron en el primer tercio del periodo, que equivale a 90 días aproximadamente. También, existe un conjunto de varios decesos presentados en el periodo de casi 180 días. Por último, parece ser que los pacientes que tuvieron un periodo más largo de seguimiento fueron los que no presentaron el deceso. 
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[]{images/censura.pdf}
+\caption{En el eje horizontal tenemos el tiempo de duración del estudio y en el eje vertical cada uno de los pacientes. Los pacientes están ordenados de acuerdo a los días del periodo de seguimiento. El color azul indica si fue un deceso y el rosa lo contrario. }
+\label{fig:censurados}
+\end{figure}
+
+
+
 
 \section{Modelado e implementación}
 
