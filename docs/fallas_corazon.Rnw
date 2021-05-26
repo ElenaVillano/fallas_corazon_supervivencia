@@ -107,9 +107,33 @@ Este conjunto de datos contiene los registros médicos de 299 pacientes que tuvi
 
 \subsection{Análisis exploratorio}
 
-
+~\ref{fig:censurados}
 
 \section{Modelado e implementación}
+
+\subsection{Verificación de supuestos}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[]{images/supuestos.pdf}
+\caption{hola}
+\label{fig:supuestos}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[]{images/km_vida.pdf}
+\caption{hola}
+\label{fig:km_vida}
+\end{figure}
+
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[]{images/niveles.pdf}
+\caption{hola}
+\label{fig:km_vida}
+\end{figure}
 
 describan con detalle el modelo, con todas sus especificaciones, que usarán para resolver sus objetivos. Corran su modelo en R, Python o el paquete que mejor les acomode.
 
