@@ -143,7 +143,9 @@ a1 <- ggsurvplot(xfit,
                  conf.int = TRUE, 
                  break.time.by = 50, 
                  legend.title = "",
-                 xlab='')
+                 xlab='',
+                 font.y = c(12, "plain", "black"),
+                 font.tickslab=c(8,'plain','black'))
 
 # anemia
 xfit <- survfit(Surv(corazones$tiempo, corazones$fallecimiento)~anemia, 
@@ -151,7 +153,10 @@ xfit <- survfit(Surv(corazones$tiempo, corazones$fallecimiento)~anemia,
 a2 <- ggsurvplot(xfit, 
            conf.int = TRUE, 
            break.time.by = 50, 
-           legend.title = "")
+           legend.title = "",
+           font.x = c(12, "plain", "black"),
+           font.y = c(12, "plain", "black"),
+           font.tickslab=c(8,'plain','black'))
 
 # diabetes
 xfit <- survfit(Surv(corazones$tiempo, corazones$fallecimiento)~diabetes, 
@@ -161,7 +166,8 @@ a3 <- ggsurvplot(xfit,
                  break.time.by = 50, 
                  legend.title = "",
                  xlab='',
-                 ylab='')
+                 ylab='',
+                 font.tickslab=c(8,'plain','black'))
 
 # fumar
 xfit <- survfit(Surv(corazones$tiempo, corazones$fallecimiento)~fumar, 
@@ -171,7 +177,8 @@ a4 <- ggsurvplot(xfit,
                  break.time.by = 50, 
                  legend.title = "",
                  ylab='',
-                 xlab='')
+                 xlab='',
+                 font.tickslab=c(8,'plain','black'))
 
 # presion alta
 xfit <- survfit(Surv(corazones$tiempo, corazones$fallecimiento)~presion_alta, 
@@ -180,7 +187,9 @@ a5 <- ggsurvplot(xfit,
                  conf.int = TRUE, 
                  break.time.by = 50, 
                  legend.title = "",
-                 ylab='')
+                 ylab='',
+                 font.x = c(12, "plain", "black"),
+                 font.tickslab=c(8,'plain','black'))
 
 # nivel creatinina
 breaks_2 <- c(0,1.16)
@@ -193,7 +202,9 @@ a6 <- ggsurvplot(xfit,
                  conf.int = TRUE, 
                  break.time.by = 50, 
                  legend.title = "",
-                 xlab='')
+                 xlab='',
+                 font.y = c(12, "plain", "black"),
+                 font.tickslab=c(8,'plain','black'))
 
 # graficamos todos en una sola
 splots <- list()
@@ -219,14 +230,20 @@ corazones$ef_intervals <- ef_intervals
 
 xfit <- survfit(Surv(tiempo, fallecimiento)~ef_intervals, 
                 conf.type = "log-log", data = corazones)
-a2 <- ggsurvplot(xfit, 
+a <- ggsurvplot(xfit, 
                  conf.int = TRUE, 
                  break.time.by = 50, 
-                 legend.title = "")
+                 legend.title = "",
+                font.x = c(12, "plain", "black"),
+                font.y = c(12, "plain", "black"),
+                font.tickslab=c(8,'plain','black'))
+
+a
+#ggsave('niv_creati.pdf',  path = '../docs/images/')
 
 
 
-#ggsave('niveles.pdf',  path = '../docs/images/')
+
 ######### ex
 
 # anemia

@@ -120,9 +120,11 @@ Este conjunto de datos contiene los registros médicos de 299 pacientes que tuvi
 \label{fig:supuestos}
 \end{figure}
 
+
+
 \begin{figure}[!ht]
 \centering
-\includegraphics[]{images/km_vida.pdf}
+\includegraphics[]{images/niveles.pdf}
 \caption{hola}
 \label{fig:km_vida}
 \end{figure}
@@ -130,7 +132,7 @@ Este conjunto de datos contiene los registros médicos de 299 pacientes que tuvi
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[]{images/niveles.pdf}
+\includegraphics[]{images/niv_creati.pdf}
 \caption{hola}
 \label{fig:km_vida}
 \end{figure}
