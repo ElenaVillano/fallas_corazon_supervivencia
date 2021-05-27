@@ -134,7 +134,7 @@ La siguiente Figura~\ref{fig:funciones} se pueden observar las gráficas de supe
 \begin{figure}[!ht]
 \centering
 \includegraphics[]{images/funciones.pdf}
-\caption{Función de Kapla Meier y función de supervivencia, supuesto Lognormal.}
+\caption{Función de Kaplan Meier y función de supervivencia, supuesto Lognormal.}
 \label{fig:funciones}
 \end{figure}
 
@@ -196,9 +196,13 @@ describan con detalle el modelo, con todas sus especificaciones, que usarán par
 
 Interpretación de resultados: presenten un resumen de sus estimadores (puntuales y por intervalo) e interpreten en el contexto del problema. Planteen pruebas de hipótesis y tomen decisiones. Hagan uso de sus resultados para responder a los objetivos planteados e incluyan predicciones.
 
-Lo que presentaremos a continuación, será 
+Lo que presentaremos a continuación, serán los resultados de los mejores modelos con las variables que resultaron ser signficativas. Realizamos una comprobación de supuestos, por lo que para el modelo de vida acelerada el modelo evaluado fue el de lognormal. 
+
+
 
 \subsection{Vida acelerada}
+
+Para este modelo se observa que los coeficientes de edad, la enzima cpk, presión alta y el nivel de creatinina, tienen un impacto negativo en la supervivencia. Mientras que la única variable que tiene un efecto positivo en la supervivencia fue salida de sangre. Sin embargo, los únicos coeficientes significativos fueron edad, salida de sangre, y nivel de creatinina.
 
 <<echo=FALSE, eval=TRUE, warning=F, error=F, message=F>>=
 library(tidyverse)
@@ -236,6 +240,8 @@ summary(xfitp)
 
 
 \subsection{Riesgos proporcionales}
+
+Para el modelo de riesgos proporcionales, los coeficientes tienen un efecto 
 
 <<echo=FALSE, eval=TRUE, warning=F, error=F, message= F>>=
 summary(xfitc)
