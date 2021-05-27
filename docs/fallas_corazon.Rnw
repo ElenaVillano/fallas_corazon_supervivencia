@@ -166,7 +166,7 @@ Interpretación de resultados: presenten un resumen de sus estimadores (puntuale
 
 \subsection{Vida acelerada}
 
-<<echo=FALSE,eval=TRUE, warning=F, error=F, message= F>>=
+<<echo=FALSE, eval=TRUE, warning=F, error=F, message=F>>=
 library(tidyverse)
 library(survminer)
 library(survival)
@@ -203,7 +203,7 @@ summary(xfitp)
 
 \subsection{Riesgos proporcionales}
 
-<<echo=FALSE,eval=TRUE, warning=F, error=F, message= F>>=
+<<echo=FALSE, eval=TRUE, warning=F, error=F, message= F>>=
 summary(xfitc)
 @
  
