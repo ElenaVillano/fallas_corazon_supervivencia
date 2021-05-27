@@ -8,7 +8,7 @@
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage{amsmath}
-
+\usepackage[rightcaption]{sidecap}
 
 %%%%%% Title %%%%%%
 % Full titles can be a maximum of 200 characters, including spaces. 
@@ -40,48 +40,48 @@
 
 El término médico adecuado de una falla del corazón, es disfunción sistólica ventricular que se refiere a cuando el ventrículo izquierdo del corazón, muestra una disminución en su funcionalidad. Dicha disminución limitará la cantidad de sangre que bombea el corazón a todo el cuerpo, lo que puede puede producir insuficiencia cardiaca congestiva, infarto al miocardio, entre otras enfermedades vasculares (AEEC, s.f.). 
 
-Las fallas en el corazón son la causa de muerte más comun en hombres, mujeres y personas de distintos grupos étnicos en países como Estados Unidos. Además, en México, las enfermedades del corazón han aumentado un 90\% desde 1970 y son la segunda causa de muerte, representando el 17\% de todas las muertes en 2008 (Morales et al, 2014). 
+Las fallas en el corazón son la causa de muerte más común en hombres, mujeres y personas de distintos grupos étnicos en países como Estados Unidos. Además, en México, las enfermedades del corazón han aumentado un 90\% desde 1970 y son la segunda causa de muerte, representando el 17\% de todas las muertes en 2008 (Morales et al, 2014). 
 
-Existen muchas causas de fallas del corazón, como la presión alta, la diabetes, el tabaquismo, la alimentación, etc. A pesar de esto, parece que no hay un concenso en las causas de esta enfermedad, por lo que hay varios esfuerzos para determinar las razones principales de esta enfermedad. 
+Las fallas en el corazón están asociadas con factores como la presión alta, la diabetes, el tabaquismo, la alimentación, etc. A pesar de esto, parece que no hay un concenso en las causas de esta enfermedad, por lo que hay varios esfuerzos para determinar las razones principales de esta enfermedad. 
 
 \subsection{Objetivo}
 
-El objetivo del presente trabajo es estudiar variables asociadas a fallas del corazón por lo que buscaremos estimar la mortalidad de dicha enfermedad, relacionada a otros factores riesgo.
+El objetivo del presente trabajo es estudiar variables asociadas a fallas del corazón por lo que buscaremos estimar la supervivencia de dicha enfermedad relacionada a otros factores riesgo.
 
 \section{Base de datos}
 
-Este conjunto de datos contiene los registros médicos de 299 pacientes que tuvieron una falla en el corazón. Todos los pacientes tuvieron una disfunción ventricular sistólica izquierda y pertenecen a alguna de las clases 3 o 4, de la clasificación de insuficiencia cardiaca según la NYHA (New York Heart Association). Este estudio se llevó a cabo en Pakistán y tuvo un periodo de seguimiento de 4 a 285 días, con un promedio de 130 días. Cada persona fue diagnosticada por un cirujano médico. Cada paciente tiene las siguientes 13 características clínicas\footnote{Base de datos obtenidas del Machine Learning Repository: {https://archive.ics.uci.edu/}}.
+Este conjunto de datos contiene los registros médicos de 299 (MLR, 2021) pacientes que tuvieron una falla en el corazón. Todos los pacientes tuvieron una disfunción ventricular sistólica izquierda y pertenecen a alguna de las clases 3 o 4, de la clasificación de insuficiencia cardiaca según la NYHA (New York Heart Association). Este estudio se llevó a cabo en Pakistán y tuvo un periodo de seguimiento de 4 a 285 días, con un promedio de 130 días. Cada persona fue diagnosticada por un cirujano médico. Cada paciente tiene las siguientes 13 características clínicas.
 
 \begin{itemize}
   \item \texttt{edad}: Edad del paciente (años). 
   \item \texttt{sexo}: Mujer u hombre (binaria).
-  \item \texttt{anemia}: Disminución de glóbulos rojos o hemoglobina (booleana).
-  \item \texttt{diabetes}: Si el paciente tiene diabetes (booleana). 
-  \item \texttt{fumar}: Tabaquismo, si el paciente fuma o no (booleana).
-  \item \texttt{presion alta}: Si el paciente tiene hipertensión (booleana).
+  \item \texttt{anemia}: Disminución de glóbulos rojos o hemoglobina (binaria).
+  \item \texttt{diabetes}: Si el paciente tiene diabetes (binaria). 
+  \item \texttt{fumar}: Tabaquismo, si el paciente fuma o no (binaria).
+  \item \texttt{presion alta}: Si el paciente tiene hipertensión (binaria).
   \item \texttt{salida sangre}: Fracción de ejección, porcentaje de sangre que sale del corazón en cada contracción (porcentaje).
   \item \texttt{enzima cpk}: Nivel de la enzima CPK en sangre (mcg/L).
   \item \texttt{plaquetas}: Plaquetas en la sangre (kiloplaquetas/ml).
   \item \texttt{nivel creanitina}: Nivel de creatinina sérica en sangre (mg/dl).
-  \item \texttt{nivel sodio}: Nivel de sodio sérico en sanre (mEq/L).
+  \item \texttt{nivel sodio}: Nivel de sodio sérico en sangre (mEq/L).
   \item \texttt{tiempo}: Periodo de seguimiento (días).
-  \item \texttt{deceso}: Si el paciente falleció durante el período de seguimiento (booleana).
+  \item \texttt{deceso}: Si el paciente falleció durante el período de seguimiento (binaria).
 \end{itemize}
 
 A continuación, se presenta un análisis exploratorio para observar el comportamiento general de las variables. 
 
 \subsection{Análisis exploratorio}
 
-En la Figura~\ref{fig:edad_sexo}, se observa de lado izquierdo un gráfico de barras para la variable de sexo, que nos muestra que tenemos casi el doble de hombres que mujeres. En el histograma de lado derecho, podemos las edades de todos los participantes, el rango de edad va de 40 a casi 100; observamos que tenemos más conteos de edades en los 50, también se observa una concentración de conteos en los 40, 45, 50, 60, 65 y 70. 
+En la Figura~\ref{fig:edad_sexo}, se observa de lado izquierdo un gráfico de barras para la variable de sexo, que nos muestra que tenemos casi el doble de hombres que mujeres. En el histograma de lado derecho, podemos observar las edades de todos los participantes, el rango de edad va de 40 a casi 100 años; observamos que tenemos más conteos de edades en los 50, también se observa una concentración en los conteos de las edades de 40, 45, 50, 60, 65 y 70. 
 
-La Figura~\ref{fig:binary}, presenta también gráficos de barras de todas las variables booleanas que tenemos en el estudio que son anemia, diabetes, hipertensión y fumar. En todas, el 1 significa presencia y el cero ausencia. En la mayoría observamos más presencia de personas que se podrían considerar sanas en estas características pues no tiene ni anemia, ni diabetes, ni hipertensión. Así mismo, la variable que más diferencia tiene es la de tabaquismo, pues casi el doble de los sujetos no fuman, en comparación con los que sí fuman. 
+La Figura~\ref{fig:binary}, presenta también gráficos de barras de todas las variables binarias que tenemos en el estudio que son anemia, diabetes, hipertensión y fumar. En todas, el uno significa presencia y el cero ausencia. En todas las variables mencionadas observamos más presencia de personas que se podrían considerar \emph{sanas},  pues en todas prevalece la ausencia de estos factores de riesgo. Las diferencias más grandes se observan en las variables de hipertensión y de si fumma o no, pues casi el doble de los pacientes tenían ausencia de estos factores. En cuanto a las variables de anemia y diabetes, las diferencias entre la presencia o ausencia, son de unas cuantas decenas.
 
 
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[]{images/edad_sexo.pdf}
-\caption{Gráficos de sexo y edad: De lado izquierdo es un gráfico de barras para sexo, done 1 significa hombre y 0 mujer. De lado derecho, un histograma con las edades de los participantes.}
+\caption{Gráficos de sexo y edad: De lado izquierdo es un gráfico de barras para sexo, donde 1 significa hombre y 0 mujer. De lado derecho, un histograma con las edades de los participantes.}
 \label{fig:edad_sexo}
 \end{figure}
 
@@ -89,11 +89,9 @@ La Figura~\ref{fig:binary}, presenta también gráficos de barras de todas las v
 \begin{figure}[!ht]
 \centering
 \includegraphics[]{images/binary.pdf}
-\caption{Graficos de barras para las variables de anemia, diabetes, hipertensión y tabaquismo.}
+\caption{Gráficos de barras para las variables de anemia, diabetes, hipertensión y tabaquismo.}
 \label{fig:binary}
 \end{figure}
-
-La Figura~\ref{fig:corplot} es un gráfico que contiene los scatterplots de las variables continuas que tenemos, así mismo su contraparte muestra las correlaciones. Existen dos colores, el azu, hace referencia a los hombres  y el rosa a las mujeres. Además, las variables de salida sangre y plaquetas están en logaritmo para poder apreciar mejor la relación con otras variables. El objetivo de mostrar este gráfico es para apreciar que no existen correlaciones claras entre las variables continuas, que se confirma con el estadístico de correlación, esto sucede para ambos sexos. 
 
 \begin{figure}[!ht]
 \centering
@@ -102,48 +100,36 @@ La Figura~\ref{fig:corplot} es un gráfico que contiene los scatterplots de las 
 \label{fig:corplot}
 \end{figure}
 
+La Figura~\ref{fig:corplot} es un gráfico de pares que presenta información de las variables continuas de nuestra base de datos. El color azul corresponde a los hombres y el rosa a las mujeres. En la parte inferior tenemos los gráficos de dispersión entre las variables de enzima cpk, salida de sangre, plaquetas, nivel de creatinina y nivel de sodio. Asimismo, su contraparte muestra las correlaciones de las variables ya mencionadas, distinguidas también por sexo. Para este gráfico, colocamos las variables de salida sangre y plaquetas en logaritmo para poder apreciar de mejor manera alguna posible correlación con las otras variables. 
+
+En la Figura~\ref{fig:corplot} se puede apreciar que no existen fuertes correlaciones entre las variables continuas, que se confirma con el estadístico de correlación, esto sucede para ambos sexos. Podría ser que la variable de salida de sangre y plaquetas tienen una correlación positiva pero realmente es muy baja. Los otros gráficos de dispersión parecen más un cúmulo de puntos sin correlación. En cuanto a la densidades individuales de cada variable, plaquetas y nivel de sodio, parecen tener un comportamiento un poco similar a una distribución normal. Las distribución de salida de sangre y enzima cpk, parece asemejarse a una distribución bimodal. Por último, el nivel de creatinina, parece tener muchos valores atípicos. Estas densidades individuales tienen un comportamiento similar entre hombres y mujeres. 
+
+
+
 \subsection{Datos censurados}
 
-La variable evento muerte nos indica si el paciente falleció o no durante el periodo de seguimiento. En la presente base de datos, el 32\% de los pacientes fallecieron durante el periodo de seguimiento del estudio. En la Figura~\ref{fig:censurados} podemos observar una línea que indica el periodo de seguimiento para cada paciente y si es un dato censurado o no, indicado por color. Lo importante de este gráfico es observar la mayoría de los pacientes que fallecieron durante el estudio, lo hicieron en el primer tercio del periodo, que equivale a 90 días aproximadamente. También, existe un conjunto de varios decesos presentados en el periodo de casi 180 días. Por último, parece ser que los pacientes que tuvieron un periodo más largo de seguimiento fueron los que, afortunadamente, no fallecieron. 
 
-\begin{figure}[!ht]
-\centering
-\includegraphics[]{images/censura.pdf}
-\caption{En el eje horizontal tenemos el tiempo de duración del estudio y en el eje vertical cada uno de los pacientes. Los pacientes están ordenados de acuerdo a los días del periodo de seguimiento. El color azul indica si fue un deceso y el rosa lo contrario. }
+En la presente base de datos, el 32\% de los pacientes fallecieron durante el periodo de seguimiento del estudio. En la Figura~\ref{fig:censurados} podemos observar una línea que indica el periodo de seguimiento para cada paciente y si se presentó el deceso, indicado por color, cero es que no se observó el evento y uno que sí. En este gráficos los pacientes están ordenados de acuerdo al número de días en el periodo de seguimiento. Se podría decir algunos de estos datos están \emph{censurados por derecha} pues el tiempo observado del estudio es menor al tiempo real en que los partipantes presentaron el evento de interés, que en este caso, es el lamentable deceso. 
+
+\begin{SCfigure}[0.5][h]
+\caption{En el eje horizontal tenemos el periodo de seguimiento en días, y en el eje vertical cada uno de los pacientes. Cada línea es la duración de cada participante en el estudio. Están ordenados de acuerdo a número días. El color azul indica si fue un deceso y el rosa los datos censurados.}
+\includegraphics[width=0.6\textwidth]{images/censura.pdf}
 \label{fig:censurados}
-\end{figure}
+\end{SCfigure}
 
+
+En este gráfico se puede observar que la mayoría de los pacientes que fallecieron durante el estudio, lo hicieron en un periodo de alrededor de 90 días aproximadamente. También, existe un conjunto de varios decesos presentados en el periodo de casi 180 días. Por último, parece ser que los pacientes que tuvieron un periodo más largo de seguimiento fueron los que, afortunadamente, no fallecieron durante el estudio. 
 
 \section{Modelado e implementación}
 
-\subsection{Verificación de supuestos}
-
-Se ajustaron diferentes familias de modelos paramétricos (weibull, lognormal y loglogística) para aproximar la supervivencia, resultando el modelo Lognormal con una media de 5.91 y una desviación de 1.91 el que presentó una mejor log-verosimilitud. 
-
-Por otra parte, se realizaron gráficas de diagnóstico (Figura~\ref{fig:supuestos}), en las que también se observa que el modelo log-normal es el que mejor parece adaptarse a los datos.
-
-\begin{figure}[!ht]
-\centering
-\includegraphics[]{images/supuestos.pdf}
-\caption{Gráficos de verificación de modelos Exponencial, Weibull y Lognormal.}
-\label{fig:supuestos}
-\end{figure}
-
-La siguiente Figura~\ref{fig:funciones} se pueden observar las gráficas de supervivencia paramétrica (a partir del modelo lognormal antes mencionado) y no paramétrica (a partir del Kaplan Mayer). Se observa una superposición entre ambas, lo que da cuenta de la similitud entre ambos modelos.
-
-\begin{figure}[!ht]
-\centering
-\includegraphics[]{images/funciones.pdf}
-\caption{Función de Kaplan Meier y función de supervivencia, supuesto Lognormal.}
-\label{fig:funciones}
-\end{figure}
+En el presente estudio se implementaron tres tipos de análisis, uno no paramétrico, uno semi-paramétrico y uno paramétrico, que corresponden al estimador Kaplan Meier, Riesgos Proporcionales y Vida Acelerada, respectivamente. 
 
 \subsection{Kaplan Meier}
 
-\begin{figure}[!ht]
+\begin{figure}[!hp]
 \centering
 \includegraphics[]{images/niveles.pdf}
-\caption{Estimador Kaplan Meier para las variables dicotómicas.}
+\caption{Estimador Kaplan Meier para las variables dicotómicas nivel de creatinina, diabetes, sexo, fumar, anemia y presión alta. Cada variable se referencía en el título de cada sub-gráfico, así como el color que indica cada valor. El cero implica ausencia (rosa) y el 1 presencia (azul), excepto para el nivel de creatinina que 0 es nivel bajo, y 1.16 alto.}
 \label{fig:km}
 \end{figure}
 
@@ -151,58 +137,25 @@ La siguiente Figura~\ref{fig:funciones} se pueden observar las gráficas de supe
 \begin{figure}[!ht]
 \centering
 \includegraphics[]{images/niv_creati.pdf}
-\caption{Estimador Kaplan Meier para la variable categórica de salida de sangre.}
+\caption{Estimador Kaplan Meier para la variable categórica de salida de sangre. Son tres categorías, la primera pertenece al porcentaje sangre salida del corazón menor de 30, la segunda entre 30 y 45, y la tercera de mayor o igual a 45.}
 \label{fig:km_2}
 \end{figure}
 
 
-Para el presente análisis se utilizó el estimador Kaplan Meier para determinar la supervivencia de las variables categóricas que tenemos en la muestra. Por ejemplo, en la Figura~\ref{fig:km} obtuvimos el estimador para todas las variables binarias que tenemos, como lo son diabetes, sexo, fumar, anemia y presión alta. Asimismo, se creó una variable que categoriza el nivel de creatinina en alto o bajo. Esta discretización se realizó basándonos en los umbrales mencionados por Wannamethee et. Al (1997), que consideraban que la concentración de 16 micromol/L (micromoles por litro de sangre) de creatinina, generaba un riesgo de ataque al corazón.
+Para el presente análisis se utilizó el estimador Kaplan Meier para determinar la supervivencia de las variables categóricas que tenemos en la muestra. En la Figura~\ref{fig:km} se pueden apreciar los sub-gráficos de dicho estimador para cada una de las variables binarias que tenemos, como lo son diabetes, sexo, fumar, anemia y presión alta. 
 
-En dicha figura observamos que las supervivencias de diabetes y fumar, no son muy diferenten entre su presencia o ausencia. En cuanto a las variables de anemia y presión alta, parece que la ausencia de estas hace tener una supervivencia más alta, sin embargo, los intervalos de confianza se traslapan para ambas categorías. Por otro lado, las supervivencia que más se separan son las del nivel de creatinina. una supervivencia muy distinta para grupos que padecen alguna enfermedad (como la diabetes o la anemia) que tradicionalmente suelen estar asociadas a los ataques al corazón. Lo mismo sucede con los grupos de fumadores, en comparación con los no fumadores. 
+Asimismo, se creó una variable que categoriza el nivel de creatinina en alto o bajo. Esta discretización se realizó basándonos en los umbrales mencionados por Wannamethee et al. (1997), que consideraban que la concentración de 16 micromol/L (micromoles por litro de sangre) de creatinina, generaba un riesgo de ataque al corazón. Este sub-gráfico se colocó también en la Figura~\ref{fig:km} y se encuentra en el extremo superior izquierdo. En este, se puede observar que las probabilidades de supervivencia se diferencían mucho si se tiene una concentración de creatinina alta o no. En otras palabras, si se entra en la categoría de niveles de creatinina alta, la probabilidad de supervivencia es mucho menor, a si tienes los niveles de creatinina bajos. Dicha diferenciación se puede apreciar mejor al final en los periodos más largos. 
 
-De igual manera, la variable ejection fraction se discretizó en tres grupos, siguiendo a Ahmad et al. (2017). En ambos casos, las tablas Kaplan Meyer muestran un grupo de riesgo con una supervivencia considerablemente menor, lo que sugiere que estas variables podrían tener un efecto explicativo relevante.
+En los otros sub-gráficos de la Figura~\ref{fig:km} también observamos que la probabilidad de supervivencia para la presencia (1) y ausencia (0) de las variables diabetes y tabaquismo, que parecen ser muy similares a lo largo del tiempo, además de sobrelaparse. Algo similar sucede para la variable de sexo, que parece no generar supervivencias diferentes dependiendo de si eres hombre o mujer. En cuanto a las variables de anemia y presión alta, parece que la ausencia genera una mayor probabilidad de supervivencia, sin embargo, hay que notar que los intervalos de confianza se traslapan un poco para ambas categorías. 
 
-
-
-
-describan con detalle el modelo, con todas sus especificaciones, que usarán para resolver sus objetivos.
-
-
-\begin{figure}[!ht]
-\centering
-\includegraphics[]{images/curvas_todas.pdf}
-\caption{En el eje horizontal tenemos el tiempo de duración del estudio y en el eje vertical cada uno de los pacientes. Los pacientes están ordenados de acuerdo a los días del periodo de seguimiento. El color azul indica si fue un deceso y el rosa lo contrario. }
-\label{fig:curvas}
-\end{figure}
-
-
-
-\begin{figure}[!ht]
-\centering
-\includegraphics[]{images/residuales.pdf}
-\caption{En el eje horizontal tenemos el tiempo de duración del estudio y en el eje vertical cada uno de los pacientes. Los pacientes están ordenados de acuerdo a los días del periodo de seguimiento. El color azul indica si fue un deceso y el rosa lo contrario. }
-\label{fig:curvas}
-\end{figure}
-
-
-\begin{figure}[!ht]
-\centering
-\includegraphics[]{images/residuales2.pdf}
-\caption{En el eje horizontal tenemos el tiempo de duración del estudio y en el eje vertical cada uno de los pacientes. Los pacientes están ordenados de acuerdo a los días del periodo de seguimiento. El color azul indica si fue un deceso y el rosa lo contrario. }
-\label{fig:curvas}
-\end{figure}
-
-\section{Resultados}
-
-Interpretación de resultados: presenten un resumen de sus estimadores (puntuales y por intervalo) e interpreten en el contexto del problema. Planteen pruebas de hipótesis y tomen decisiones. Hagan uso de sus resultados para responder a los objetivos planteados e incluyan predicciones.
-
-Lo que presentaremos a continuación, serán los resultados de los mejores modelos con las variables que resultaron ser signficativas. Realizamos una comprobación de supuestos, por lo que para el modelo de vida acelerada el modelo evaluado fue el de lognormal. 
-
+Un análisis similar se realizó para la variable salida de sangre, que recordemos se refiere al porcentaje de sangre que sale del corazón en cada contracción, la cual se discretizó en tres grupos diferentes, siguiendo los estudios de Ahmad et al. (2017). Este análisis se encuentra en la Figura~\ref{fig:km_2} donde se puede apreciar que existe una mayor probabilidad de supervivencia si se tiene un mayor porcentaje de sangre que sale del corazón. En cambio, la categoría que tiene un porcentaje mejor, tiene una probabilidad de supervivencia mucho menor en comparación con las otras dos categorías. 
 
 
 \subsection{Vida acelerada}
 
-Para este modelo se observa que los coeficientes de edad, la enzima cpk, presión alta y el nivel de creatinina, tienen un impacto negativo en la supervivencia. Mientras que la única variable que tiene un efecto positivo en la supervivencia fue salida de sangre. Sin embargo, los únicos coeficientes significativos fueron edad, salida de sangre, y nivel de creatinina.
+Se evaluaron diversos modelos probando diferentes combinaciones de variables, así como aquel modelo que consideraba todas las variables. El modelo que se presenta a continuación fue uno de los que consideramos más parsimoniosos y que considera las variables que aportan significancia al modelo. 
+
+En el siguiente bloque se presenta un resumen de la evaluación del mejor modelo. En este se puede observar que los coeficientes de edad, salida de sangre y nivel de creatinina, son significativas por lo que sus coeficientes son diferentes de cero, es decir, tienen un impacto en los tiempos de supervivencia. Por otro lado, las variables de enzima cpk y presión alta, no tuvieron significancia en este modelo. En evaluaciones de modelos anteriores, quitamos las variables de enzima cpk y presión alta del modelo, sin embargo, eso generaba que la log-verosimilitud de modelo no fuera tan adecuada, en comparación a este modelo. Adicionalmente, notamos que las variables categóricas no tenían significancia cuando se las agregaba a los modelos. La única variable binaria que parece tener un efecto es la de presión alta. Las otras variables como sexo, diabetes y fumar, casi en ningún modelo tenían significancia. 
 
 <<echo=FALSE, eval=TRUE, warning=F, error=F, message=F>>=
 library(tidyverse)
@@ -241,14 +194,54 @@ summary(xfitp)
 
 \subsection{Riesgos proporcionales}
 
-Para el modelo de riesgos proporcionales, los coeficientes tienen un efecto 
+Para el modelo de riesgos proporcionales, los coeficientes que tienen un efecto en los tiempos de supervivencia son la edad, la salida de sangre la presión alta y el nivel de creatinina. En este caso, la variable de enzima cpk no tiene efecto en la supervivencia. Si observamos, en este modelo la variable de enzima cpk sigue sin tener efecto. Por otro lado la variable de presión alta, para este modelo tiene significacia de 0.01, por lo que si entra en la zona de rechazo por lo que puedo decir que tiene una influencia en los tiempos de supervivencia. 
+
+En cuanto a los demás modelos evaluados, este fue de la misma manera el que tenía las variables que consideramos más adecuadas dadas las métricas de log-verosimilitud. Además, se confirmó de la misma manera que las variables binarias como sexo, fumar y diabetes no tuvieron efecto en la supervivencia. Otra variable que salió significativa en ambos modelos fue la del nivel de creatinina, que desde antes que habíamos realizado una categorización entre alta y baja, habíamos observado que generaba una diferencia en la probabilidad de supervivencia. En estos modelos, se confirmó que tomarla en cuenta como variable continua, también es significativa en el modelo y que su coeficiente es diferente de cero. 
+
 
 <<echo=FALSE, eval=TRUE, warning=F, error=F, message= F>>=
 summary(xfitc)
 @
  
 
-\section{Discusión}
+\subsection{Validación de modelos}
+
+Para la realizar la validación de los modelos ya mencionábamos que realizamos la evaluación de diferentes combinaciones de variables, y concluimos que el modelo que contempla edad, proporción de salida de sangre, nivel de creatinina y presión alta, son las que tienen un efecto en los tiempos de supervivencia. Para continuar con la elección y validación de modelos presentamos la Figura~\ref{fig:curvas} que muestra la probabilidad de supervivencia de los mejores modelos para la estimación paramétrica y semiparamétrica, que incluyen los regresores ya mencionados. En esta figura también se agregó el estimador Kaplan Meier para poder comparar de manera empírica con las diferentes curvas de supervivencia.
+
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[]{images/curvas_todas.pdf}
+\caption{Curvas de supervivencia para el estimador KM, para el modelo de vida acelerada y para el modelo de riesgos proporcionales, estos dos últimos considerando las mejores variables regresoras.}
+\label{fig:curvas}
+\end{figure}
+
+En esta figura se puede observar como la curva del modelo de vida acelerada, decae drásticamente y no coincide en nada con el estimador Kaplan Meier. En cambio, el modelo de riesgos proporcionales parece acercarse mejor a la curva empírica de los tiempos de supervivencia. Esto puede ser un indicio de que para  nuestros datos conviene usar un modelo semi-paramétrico, pues este parece adecuarse mejor. 
+
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[]{images/residuales.pdf}
+\caption{Gráficos de residuales para el modelo de vida acelerada.}
+\label{fig:residuales_vida}
+\end{figure}
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[]{images/residuales2.pdf}
+\caption{Residuales para el modelo de riesgos proporcionales.}
+\label{fig:residuales_riesgos}
+\end{figure}
+
+Otra manera de validar los mejores modelos es tomando en cuenta los residuales, la Figura~\ref{fig:residuales_vida}, muestra tres diferentes gráficos que muestran el comportamiento de los residuales para el modelo de vida acelerada. De este gráfico lo primero que tenemos que observar es que la distribución de los residuales no sigue una distribución normal y que muchos de éstos se encuentran jalados a valores negativos. Además, tiene un pico muy alto en el histograma que se acerca a cero. En el gráfico superior, se observa que también todos los residuales tienden a ser negativos para casi todos los periodos de tiempo, lo cual no es un buen indicio. Por último, el gráfico de ACF, muestra la autorrelación de estos mismos y se observa que en un punto se pasa de las bandas azules y en otros se acercan mucho, por lo que no es un buen indicio de este modelo. 
+
+Por último, mostraremos los residuales para el modelo de riesgos proporcionales, mejor conocidos como residuos Cox-Snell. En la Figura~\ref{fig:residuales_riesgos}, se muestra un gráfico de diagnóstico donde si el modelo de riesgos proporcionales ajusta a los datos, la gráfica debe ser una línea recta que pasa por el origen. Para este caso, se observa que los residuales coinciden en varios puntos con las tasa de riesgo acumulada, solo existen algunos residuales en la parte central del gráfico que no coinciden a la perfección con la línea recta, sin embargo, realmente no son muchas las observaciones que no coinciden. 
+
+\section{Resultados y conclusiones}
+
+En el presente proyecto se encontró que las variables que tienen un efecto sigficativo sobre los tiempos de supervivencia fueron la edad, proporción de salida de sangre, nivel de creatinina y presión alta. El modelo que mejor parece adecuarse a nuestros datos fue el de riesgos proporcionales, pues como vimos parece acercarse más a la supervivencia de KM y tiene mejor comportamiento en sus residuales. El modelo de vida acelerada, es uno completamente paramétrico que puede que no se se este adecuado a nuestros datos, tal como lo vimos en sus residuales. Además, evaluamos familias de modelos para la regresión de vida acelerada y aún así, el modelo semiparamétrico funciona mucho mejor. 
+
+\newpage
 
 \section*{Referencias}
 
@@ -259,17 +252,11 @@ Incluyan una lista de las fuentes que consultaron para hacer su trabajo, desde p
   \item[] Asociación Española de Enfermería en Cardiología (s.f.). [www.enfermeriaencardiologia.com]
   \item[] Chicco D, Jurman G (2020), "Machine learning can predict survival of patients with heart failure from serum creatinine and ejection fraction alone". BMC Medical Informatics and Decision Making 20, 16.
   \item[] Morales LS, Flores YN, Leng M, Sportiche N, GallegosCarrillo K, Salmerón J. (2014). Risk factors for cardiovascular disease among Mexican-American adults in the United States and Mexico: a comparative study. Salud Publica Mex 56:197–205.
+  \item[] MLR: Machine Learning repository, Irvine University. (2021). [https://archive.ics.uci.edu].
   \item[] Tanvir Ahmad, Assia Munir, Sajjad Haider Bhatti, Muhammad Aftab, and Muhammad Ali Raza (2017), "Survival analysis of heart failure patients: a case study". PLoS ONE 12(7), 0181001.
   \item[] Wannamethee S G, Shaper A G, Perry I J (1997), Serum creatinine concentration and risk of cardiovascular disease: a possible marker for increased risk of stroke, Stroke, Mar;28(3):557-63. doi: 10.1161/01.str.28.3.557.
   
 \end{description}
 
-
-\section*{Apéndice}
-
-Apéndice. Incluyan si quieren, todo el código utilizado. Por favor no incluyen código dentro de ninguna de las secciones anteriores.
-NOTA: Las gráfica que consideren útiles las pueden incluir en cualquiera de las secciones de la i-iv con comentarios para que el lector vea lo que ustedes quieren que vean. Las gráficas que no sean indispensables las pueden mandar al apéndice.
-
-4) Preparen una presentación de 15 minutos más o menos, el formato es libre. Todos los integrantes tienen que hablar y la calificación de la presentación será individual, mientras que la calificación del trabajo será por equipo. Se penalizará a aquellos equipos que se tarden más del tiempo asignado originalmente en su presentación.
 
 \end{document}

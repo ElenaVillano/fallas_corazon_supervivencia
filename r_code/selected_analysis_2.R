@@ -204,7 +204,9 @@ a6 <- ggsurvplot(xfit,
                  legend.title = "",
                  xlab='',
                  font.y = c(12, "plain", "black"),
-                 font.tickslab=c(8,'plain','black'))
+                 font.tickslab=c(8,'plain','black'),
+                 legend.labs = c("creati=0", 
+                             "creati=1.16"))
 
 # graficamos todos en una sola
 splots <- list()
@@ -218,7 +220,7 @@ splots[[6]] <- a5
 
 res <- arrange_ggsurvplots(splots,
                     ncol = 2, nrow = 3)
-#ggsave('niveles.pdf',res,path = '../docs/images/')
+ggsave('niveles.pdf',res,path = '../docs/images/')
 
 
 breaks<-c(0,30,45)

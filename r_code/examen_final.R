@@ -130,10 +130,12 @@ ggsurvplot(xfit,
            conf.int = TRUE, 
            break.time.by = 50, 
            legend.title = "", 
-           legend.labs = c("ejection_fraction in [0, 30)", 
-                             "ejection_fraction in [30, 45)", 
-                             "ejection_fraction >= 45")
-)
+           legend.labs = c("ejec = [0, 30)", 
+                             "ejec = [30, 45)", 
+                             "ejec >= 45"),
+                font.x = c(12, "plain", "black"),
+                font.y = c(12, "plain", "black"),
+                font.tickslab=c(8,'plain','black'))
 ggsave('niv_creati.pdf',  path = '../docs/images/')
 
 
@@ -907,7 +909,7 @@ lines(survfit(xfitc), col = 3, lty = c(1, 1, 1), lwd = 2)
 
 e <- residuals(xfitp)
 
-pdf(file='../docs/images/residuales.pdf',width = 5.5,height = 5.5)
+pdf(file='../docs/images/residuales.pdf',width = 5.5,height = 4.5)
 forecast::checkresiduals(e, theme = theme_classic())
 dev.off()
 
@@ -926,11 +928,11 @@ df_base_haz <- basehaz(fit_coxsnell, centered = FALSE)
 
 
 ggplot(data = df_base_haz, mapping = aes(x = time, y = hazard)) + 
-  geom_point() + 
+  geom_abline(intercept = 0, slope = 1,col='gray') + 
+  geom_point(size=1.5, col='royalblue',alpha=0.7) + 
   scale_x_continuous(limit = c(0, 4)) + 
   scale_y_continuous(limit = c(0, 4)) + 
   labs(x = "Residual", 
        y = "Estimated Cumulative Hazard Rates") + 
-  geom_abline(intercept = 0, slope = 1) + 
   theme_classic()
 ggsave('residuales2.pdf',  path = '../docs/images/')
