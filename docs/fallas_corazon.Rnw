@@ -118,21 +118,23 @@ La variable evento muerte nos indica si el paciente falleció o no durante el pe
 
 \subsection{Verificación de supuestos}
 
-Se ajustaron diferentes familias de modelos paramétricos (weibull, lognormal y loglogística) a los datos censurados por derecha resultando el modelo Lognormal con una media de 1.91 y una desviación de 1.91 el que presentó una mejor Log veroscimilitud. Asimismo se realizaron gráficas de diagnóstico, en las que también se observa que el modelo log normal es el que mejor parece adaptarse a los datos.
+Se ajustaron diferentes familias de modelos paramétricos (weibull, lognormal y loglogística) para aproximar la supervivencia, resultando el modelo Lognormal con una media de 5.91 y una desviación de 1.91 el que presentó una mejor log-verosimilitud. 
+
+Por otra parte, se realizaron gráficas de diagnóstico (Figura~\ref{fig:supuestos}), en las que también se observa que el modelo log-normal es el que mejor parece adaptarse a los datos.
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[]{images/supuestos.pdf}
-\caption{hola}
+\caption{Gráficos de verificación de modelos.}
 \label{fig:supuestos}
 \end{figure}
 
-\subsection{Kaplan Mayer}
+\subsection{Kaplan Meier}
 
 \begin{figure}[!ht]
 \centering
 \includegraphics[]{images/niveles.pdf}
-\caption{Estimador Kaplan Mayer para las variables dicotómicas.}
+\caption{Estimador Kaplan Meier para las variables dicotómicas.}
 \label{fig:km}
 \end{figure}
 
@@ -145,11 +147,11 @@ Se ajustaron diferentes familias de modelos paramétricos (weibull, lognormal y 
 \end{figure}
 
 
-Para el presente análisis se utilizó el estimador Kaplan Mayer para determinar la supervivencia de las variables categóricas que tenemos en la muestra. Por ejemplo, en la Figura~\ref{fig:km} obtuvimos el estimador para todas las variables binarias que tenemos, como lo son diabetes, sexo, fumar, anemia y presión alta. Asimismo, se creó una variable que categoriza el nivel de creatinina en alto o bajo. Esta discretización se realizó basand
+Para el presente análisis se utilizó el estimador Kaplan Meier para determinar la supervivencia de las variables categóricas que tenemos en la muestra. Por ejemplo, en la Figura~\ref{fig:km} obtuvimos el estimador para todas las variables binarias que tenemos, como lo son diabetes, sexo, fumar, anemia y presión alta. Asimismo, se creó una variable que categoriza el nivel de creatinina en alto o bajo. Esta discretización se realizó basándonos en los umbrales mencionados por Wannamethee et. Al (1997), que consideraban que la concentración de 16 micromol/L (micromoles por litro de sangre) de creatinina, generaba un riesgo de ataque al corazón.
 
-Cada subgráfico tiene en el título la categoría a la que pertenece. En dicha figura no observamos una supervivencia distinta para grupos que padecen alguna enfermedad (como la diabetes o la anemia) que tradicionalmente suelen estar asociadas a los ataques al corazón. Lo mismo sucede con los grupos de fumadores, en comparación con los no fumadores. 
+En dicha figura observamos que las supervivencias de diabetes y fumar, no son muy diferenten entre su presencia o ausencia. En cuanto a las variables de anemia y presión alta, parece que la ausencia de estas hace tener una supervivencia más alta, sin embargo, los intervalos de confianza se traslapan para ambas categorías. Por otro lado, las supervivencia que más se separan son las del nivel de creatinina. una supervivencia muy distinta para grupos que padecen alguna enfermedad (como la diabetes o la anemia) que tradicionalmente suelen estar asociadas a los ataques al corazón. Lo mismo sucede con los grupos de fumadores, en comparación con los no fumadores. 
 
-Asimismo, discretizamos algunas variables continuas, generando intervalos que nos permitieran tener grupos, de acuerdo a umbrales mencionados por la investigación pertinente como relevantes. Siguiendo los resultados de Wannamethee et. Al (1997), generamos grupos a partir de una concentración de 116 micromol/L (micromoles por litro de sangre) de la variable nivel de creatinina, umbral a partir del cual estos autores han detectado, en un estudio basado en otros datos, un riesgo de ataque al corazón. De igual manera, la variable ejection fraction se discretizó en tres grupos, siguiendo a Ahmad et al. (2017). En ambos casos, las tablas Kaplan Meyer muestran un grupo de riesgo con una supervivencia considerablemente menor, lo que sugiere que estas variables podrían tener un efecto explicativo relevante.
+De igual manera, la variable ejection fraction se discretizó en tres grupos, siguiendo a Ahmad et al. (2017). En ambos casos, las tablas Kaplan Meyer muestran un grupo de riesgo con una supervivencia considerablemente menor, lo que sugiere que estas variables podrían tener un efecto explicativo relevante.
 
 
 
@@ -161,6 +163,49 @@ describan con detalle el modelo, con todas sus especificaciones, que usarán par
 \section{Resultados}
 
 Interpretación de resultados: presenten un resumen de sus estimadores (puntuales y por intervalo) e interpreten en el contexto del problema. Planteen pruebas de hipótesis y tomen decisiones. Hagan uso de sus resultados para responder a los objetivos planteados e incluyan predicciones.
+
+\subsection{Vida acelerada}
+
+<<echo=FALSE,eval=TRUE, warning=F, error=F, message= F>>=
+library(tidyverse)
+library(survminer)
+library(survival)
+library(KMsurv)
+
+corazones <- read.csv('/Volumes/MemoriaEle/HeavyData/heart_failure_clinical_records_dataset.csv')
+
+corazones <- corazones %>% 
+  rename(sexo = sex,
+         anemia = anaemia,
+         fumar = smoking,
+         presion_alta = high_blood_pressure,
+         salida_sangre = ejection_fraction,
+         plaquetas = platelets,
+         nivel_creati = serum_creatinine,
+         nivel_sodio = serum_sodium,
+         enzima_cpk = creatinine_phosphokinase,
+         fallecimiento = DEATH_EVENT,
+         tiempo  = time)
+
+t <- Surv(corazones$tiempo, corazones$fallecimiento)
+xfitp <- survreg(t~age+
+                   enzima_cpk+salida_sangre+
+                   presion_alta+nivel_creati, 
+                 dist = "lognormal", data = corazones)
+xfitc <- coxph(t~age+
+                 enzima_cpk+salida_sangre+
+                 presion_alta+nivel_creati, 
+               data = corazones)
+
+summary(xfitp)
+@
+
+
+\subsection{Riesgos proporcionales}
+
+<<echo=FALSE,eval=TRUE, warning=F, error=F, message= F>>=
+summary(xfitc)
+@
  
 
 \section{Discusión}

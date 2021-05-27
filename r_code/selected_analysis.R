@@ -59,7 +59,7 @@ dev.off()
 
 # Variables continuas
 pdf(file='../docs/images/corrplot.pdf',width = 6.5,height = 6.5)
-ggpairs(corazones, columns=c(3,5,7,8,17),
+ggpairs(corazones, columns=c(3,5,7,8,9),
         aes(color=as.factor(sexo),alpha=0.5))
 dev.off()
 

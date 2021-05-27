@@ -236,12 +236,12 @@ a <- ggsurvplot(xfit,
                 font.tickslab=c(8,'plain','black'))
 
 a
-#ggsave('niv_creati.pdf',  path = '../docs/images/')
+ggsave('niv_creati.pdf',  path = '../docs/images/')
 
 
 
 
-######### ex
+######### ex #
 
 # anemia
 t <- Surv(corazones$tiempo, corazones$fallecimiento)
