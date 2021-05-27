@@ -125,8 +125,17 @@ Por otra parte, se realizaron gráficas de diagnóstico (Figura~\ref{fig:supuest
 \begin{figure}[!ht]
 \centering
 \includegraphics[]{images/supuestos.pdf}
-\caption{Gráficos de verificación de modelos.}
+\caption{Gráficos de verificación de modelos Exponencial, Weibull y Lognormal.}
 \label{fig:supuestos}
+\end{figure}
+
+La siguiente Figura~\ref{fig:funciones} se pueden observar las gráficas de supervivencia paramétrica (a partir del modelo lognormal antes mencionado) y no paramétrica (a partir del Kaplan Mayer). Se observa una superposición entre ambas, lo que da cuenta de la similitud entre ambos modelos.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[]{images/funciones.pdf}
+\caption{Función de Kapla Meier y función de supervivencia, supuesto Lognormal.}
+\label{fig:funciones}
 \end{figure}
 
 \subsection{Kaplan Meier}
@@ -142,7 +151,7 @@ Por otra parte, se realizaron gráficas de diagnóstico (Figura~\ref{fig:supuest
 \begin{figure}[!ht]
 \centering
 \includegraphics[]{images/niv_creati.pdf}
-\caption{hola}
+\caption{Estimador Kaplan Meier para la variable categórica de salida de sangre.}
 \label{fig:km_2}
 \end{figure}
 
@@ -159,10 +168,35 @@ De igual manera, la variable ejection fraction se discretizó en tres grupos, si
 describan con detalle el modelo, con todas sus especificaciones, que usarán para resolver sus objetivos.
 
 
+\begin{figure}[!ht]
+\centering
+\includegraphics[]{images/curvas_todas.pdf}
+\caption{En el eje horizontal tenemos el tiempo de duración del estudio y en el eje vertical cada uno de los pacientes. Los pacientes están ordenados de acuerdo a los días del periodo de seguimiento. El color azul indica si fue un deceso y el rosa lo contrario. }
+\label{fig:curvas}
+\end{figure}
+
+
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[]{images/residuales.pdf}
+\caption{En el eje horizontal tenemos el tiempo de duración del estudio y en el eje vertical cada uno de los pacientes. Los pacientes están ordenados de acuerdo a los días del periodo de seguimiento. El color azul indica si fue un deceso y el rosa lo contrario. }
+\label{fig:curvas}
+\end{figure}
+
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[]{images/residuales2.pdf}
+\caption{En el eje horizontal tenemos el tiempo de duración del estudio y en el eje vertical cada uno de los pacientes. Los pacientes están ordenados de acuerdo a los días del periodo de seguimiento. El color azul indica si fue un deceso y el rosa lo contrario. }
+\label{fig:curvas}
+\end{figure}
 
 \section{Resultados}
 
 Interpretación de resultados: presenten un resumen de sus estimadores (puntuales y por intervalo) e interpreten en el contexto del problema. Planteen pruebas de hipótesis y tomen decisiones. Hagan uso de sus resultados para responder a los objetivos planteados e incluyan predicciones.
+
+Lo que presentaremos a continuación, será 
 
 \subsection{Vida acelerada}
 

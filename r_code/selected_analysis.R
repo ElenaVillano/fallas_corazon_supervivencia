@@ -171,59 +171,37 @@ survdiff(Surv(time,censor)~factor(race),rho=0,data=uis)
 
 survdiff(Surv(time,censor)~factor(race),rho=1,data=uis)
 
-# REGRESION
+
 
 t <- Surv(corazones$tiempo, corazones$fallecimiento)
+xfitp<-survreg(t~1,dist="lognormal")
+
+mu<-xfitp$coefficients
+sigma<-xfitp$scale
+
+tt<-seq(0,300,,1000)
+
+ft<-dlnorm(tt,mu,sigma)
+superv<-1-plnorm(tt,mu,sigma)
+riesgo<-ft/superv
 
 
-
-xfitc <- coxph(t ~ age +
-                 anemia +
-                 enzima_cpk +
-                 presion_alta +
-                 salida_sangre +
-                 nivel_creati +
-                 diabetes + 
-                 plaquetas +
-                 nivel_sodio +
-                 fumar, data = corazones)
-summary(xfitc)
-
-
-#xfitc <- coxph(t ~ age +
-#                 anemia +
-#                 enzima_cpk, data = corazones)
-#summary(xfitc)
-
-ftest <- cox.zph(xfitc)
-
-ggcoxzph(ftest)
-
-
-xfitc <- coxph(t ~ age +
-                 anemia +
-                 enzima_cpk +
-                 presion_alta +
-                 salida_sangre +
-                 nivel_creati, data = corazones)
-summary(xfitc)
-
-cox_fit <- survfit(xfitc)
-
-plot(cox_fit, main = "cph model", xlab="Days")
-
-
-autoplot(cox_fit)
-e<-residuals(xfitc)
-plot(e)
-plot(e,corazones$enzima_cpk)
-#Comparación de 7 niveles de estres 
-survdiff(Surv(BreakTimes,seq(1,1,,length(BreakTimes)))~VoltageLev,data=breakdown)
-
-
-
-
-
+pdf(file='../docs/images/funciones.pdf',width = 4,height = 6)
+layout(1:3)
+par(mar=c(3,5,2,1))
+plot(tt,ft,type="l", main='Lognormal', 
+     xlab = 'Tiempo', ylab = 'f(t)',axes=F)
+axis(1)
+axis(2,las=2)
+plot(tt,superv,type='l', main='Supervivencia', 
+     xlab = 'Tiempo', ylab = 'S(t)',axes=F)
+axis(1)
+axis(2,las=2)
+plot(tt,riesgo,type='l', main='Riesgo', 
+     xlab = 'Tiempo', ylab = 'h(t)',axes=F)
+axis(1)
+axis(2,las=2)
+dev.off()
 
 
 

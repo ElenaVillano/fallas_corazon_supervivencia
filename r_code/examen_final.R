@@ -13,7 +13,7 @@ library(actuar)
 library(BGPhazard)
 library(rmutil)
 
-datos <- read_csv("heart_failure_clinical_records_dataset.csv")
+datos <- read_csv('/Volumes/MemoriaEle/HeavyData/heart_failure_clinical_records_dataset.csv')
 datos
 
 datos %>% str()
@@ -134,6 +134,8 @@ ggsurvplot(xfit,
                              "ejection_fraction in [30, 45)", 
                              "ejection_fraction >= 45")
 )
+ggsave('niv_creati.pdf',  path = '../docs/images/')
+
 
 #Vida acelerada
 
@@ -236,21 +238,22 @@ graficar_supervivencia <- function(xfit, xfitp, variable, include.km = FALSE){
 #sin agrupar
 
 t <- Surv(datos$time, datos$DEATH_EVENT)
+
 xfit <- survfit(Surv(time, DEATH_EVENT)~1, 
                 conf.type = "log-log", data = datos)
-xfitp <- survreg(t~1, dist = "weibull", data = datos)
+#xfitp <- survreg(t~1, dist = "weibull", data = datos)
 
 xfitp <- survreg(t~1, dist = "lognormal", data = datos)
-xfitp <- survreg(t~1, dist = "loglogistic", data = datos)
-xfitp <- survreg(t~age+anaemia+
-                   creatinine_phosphokinase+diabetes+ejection_fraction+
-                   high_blood_pressure+platelets+serum_creatinine+
-                   serum_sodium+sex+smoking, dist = "weibull", data = datos)
-xfitp <- survreg(t~age+anaemia+
-                   creatinine_phosphokinase+ejection_fraction+
-                   high_blood_pressure+serum_creatinine+
-                   serum_sodium+smoking, dist = "weibull", data = datos)
-
+#xfitp <- survreg(t~1, dist = "loglogistic", data = datos)
+#xfitp <- survreg(t~age+anaemia+
+#                   creatinine_phosphokinase+diabetes+ejection_fraction+
+#                   high_blood_pressure+platelets+serum_creatinine+
+#                   serum_sodium+sex+smoking, dist = "weibull", data = datos)
+#xfitp <- survreg(t~age+anaemia+
+#                   creatinine_phosphokinase+ejection_fraction+
+#                   high_blood_pressure+serum_creatinine+
+#                   serum_sodium+smoking, dist = "weibull", data = datos)
+#
 xfitp
 summary(xfitp)
 
@@ -290,9 +293,10 @@ p + geom_ribbon(data = df, aes(xmin = lower, xmax = upper, y = y,
                      breaks = c("km", 
                                 "weibull_fit"), 
                      labels = c("km", 
-                                "weibull"
+                                "lognormal"
                      )
   )
+ggsave('funciones.pdf',  path = '../docs/images/')
 
 #anaemia  
   
@@ -806,13 +810,15 @@ xfitc$loglik
 
 #usando age, creatinine_phosphokinase, ejection_fraction, 
 #high_blood_pressure, serum_creatinine
-
+t <- Surv(datos$time, datos$DEATH_EVENT)
+xfit <- survfit(Surv(time, DEATH_EVENT)~1, 
+                conf.type = "log-log", data = datos)
 xfitp <- survreg(t~age+
                    creatinine_phosphokinase+ejection_fraction+
                    high_blood_pressure+serum_creatinine, 
                  dist = "lognormal", data = datos)
-xfitp <- survreg(t~1, 
-                 dist = "lognormal", data = datos)
+#xfitp <- survreg(t~1, 
+#                 dist = "lognormal", data = datos)
 xfitc <- coxph(t~age+
                  creatinine_phosphokinase+ejection_fraction+
                  high_blood_pressure+serum_creatinine, 
@@ -876,6 +882,7 @@ p + geom_ribbon(data = df, aes(xmin = lower, xmax = upper, y = y,
                                 "riesgos proporcionales"
                      )
   )
+ggsave('curvas_todas.pdf',  path = '../docs/images/')
 
 pct<-1:99/100
 xpredp <- predict(xfitp, type = "quantile", p = pct, se = TRUE)
@@ -900,7 +907,10 @@ lines(survfit(xfitc), col = 3, lty = c(1, 1, 1), lwd = 2)
 
 e <- residuals(xfitp)
 
+pdf(file='../docs/images/residuales.pdf',width = 5.5,height = 5.5)
 forecast::checkresiduals(e, theme = theme_classic())
+dev.off()
+
 
 #Riesgos proporcionales
 
@@ -914,6 +924,7 @@ fit_coxsnell <- coxph(formula = Surv(resid_coxsnell, datos$DEATH_EVENT) ~ 1,
 
 df_base_haz <- basehaz(fit_coxsnell, centered = FALSE)
 
+
 ggplot(data = df_base_haz, mapping = aes(x = time, y = hazard)) + 
   geom_point() + 
   scale_x_continuous(limit = c(0, 4)) + 
@@ -922,4 +933,4 @@ ggplot(data = df_base_haz, mapping = aes(x = time, y = hazard)) +
        y = "Estimated Cumulative Hazard Rates") + 
   geom_abline(intercept = 0, slope = 1) + 
   theme_classic()
-
+ggsave('residuales2.pdf',  path = '../docs/images/')
